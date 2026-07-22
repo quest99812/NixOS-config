@@ -195,6 +195,7 @@ in
       qbittorrent
       android-tools
       universal-android-debloater
+      vesktop
     ];
     shell = pkgs.fish;
   };
