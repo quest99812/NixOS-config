@@ -197,6 +197,7 @@ in
       universal-android-debloater
       gnumake
       openssl
+	  pear-desktop
     ];
     shell = pkgs.fish;
   };
