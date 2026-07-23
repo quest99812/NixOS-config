@@ -195,15 +195,29 @@ in
       qbittorrent
       android-tools
       universal-android-debloater
+      gnumake
+      openssl
     ];
     shell = pkgs.fish;
   };
 
-  # Allow unfree packages
+# Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    vim
+    # Replaced plain `vim` with customized version
+    (vim-full.customize {
+      name = "vim";
+      vimrcConfig.customRC = ''
+        set number
+        set relativenumber
+        set autoindent
+        syntax on
+        set tabstop=4
+        set shiftwidth=4
+      '';
+    })
     wget
+    curl
     polychromatic
     git
     mangohud
@@ -215,6 +229,7 @@ in
       exec env LD_LIBRARY_PATH=/run/opengl-driver/lib:${pkgs.btop}/lib ${pkgs.btop}/bin/btop "$@"
     '') #btop that can read gpu's usage
   ];
+
 
   system.stateVersion = "26.05";
 }
